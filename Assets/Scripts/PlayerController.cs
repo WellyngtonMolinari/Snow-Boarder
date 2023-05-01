@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour
     SurfaceEffector2D surfaceEffector2D;
     private Vector2 _previousRight;
     private float _angle;
-    int flips=0;
+    int flips = 0;
+    bool canMove = true;
 
     // Start is called before the first frame update
     void Start()
@@ -24,11 +25,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RotatePlayer();
-        RespondToBoost();
-        UpdateFlipCount();
+        if (canMove)
+        {
+            RotatePlayer();
+            RespondToBoost();
+            UpdateFlipCount();
+        }
+    }
+    // to disable controls when the player dies
+    public void DisableControls()
+    {
+        canMove = false;
     }
 
+    // to speed up the player when he hits the boost pad
     void RespondToBoost()
     {
         if (Input.GetKey(KeyCode.UpArrow))
@@ -40,7 +50,7 @@ public class PlayerController : MonoBehaviour
             surfaceEffector2D.speed = baseSpeed;
         }
     }
-
+    // to rotate the player
     void RotatePlayer()
     {
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -52,7 +62,7 @@ public class PlayerController : MonoBehaviour
             rb2d.AddTorque(-torqueAmount);
         }
     }
-
+    // to count the number of flips
     void UpdateFlipCount()
     {
         // get this frame's right vector
@@ -66,7 +76,7 @@ public class PlayerController : MonoBehaviour
 
         // did the angle reach +/- 360 ?
         if (Mathf.Abs(_angle) >= 360f)
-        {   
+        {
             flips++;
             Debug.Log("you did: " + flips);
 
