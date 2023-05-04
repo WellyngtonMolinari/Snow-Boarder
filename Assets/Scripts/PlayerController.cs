@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float torqueAmount = 1f;
     [SerializeField] float boostSpeed = 30f;
     [SerializeField] float baseSpeed = 20f;
+    [SerializeField] AudioClip flipSound;
     Rigidbody2D rb2d;
     SurfaceEffector2D surfaceEffector2D;
     private Vector2 _previousRight;
@@ -79,7 +80,7 @@ public class PlayerController : MonoBehaviour
         {
             flips++;
             Debug.Log("you did: " + flips);
-
+            GetComponent<AudioSource>().PlayOneShot(flipSound);
             // if _angle > 360 subtract 360
             // if _angle < -360 add 360
             _angle -= 360f * Mathf.Sign(_angle);
