@@ -1,4 +1,4 @@
 
-A Snowboarding game created in Unity<br>
+A Snowboarding game created with Unity<br>
 Preview:<br>
 https://simmer.io/@Wellyngton/snowboarder
